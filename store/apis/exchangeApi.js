@@ -4,7 +4,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const exchangesApi = createApi({
     baseQuery: fetchBaseQuery({
-        baseUrl: 'https://v6.exchangerate-api.com/v6/'+"a9b90cf5c27013b3c1686482",  // Emulator için
+        baseUrl: 'https://v6.exchangerate-api.com/v6/s'+"a9b90cf5c27013b3c1686482",  
     }),
 
     tagTypes: ['Exchange'],

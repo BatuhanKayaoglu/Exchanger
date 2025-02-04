@@ -7,7 +7,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Provider } from 'react-redux';
 import HomeScreen from '../screens/HomeScreen';
 import ProfileScreen from '../screens/ProfileScreen';
-import { Alert, Button, StyleSheet, TouchableOpacity } from 'react-native';
+import ConverterScreen from '../screens/ConverterScreen';
+import { Alert, Button, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from 'expo-router';
 import HistoryScreen from '../screens/HistoryScreen';
@@ -75,6 +76,17 @@ function ScreenTabs() {
             <Ionicons name="document-text-outline" size={size} color={color} />
             ),
             title: "History",
+        }}
+        />
+
+        <Tab.Screen
+        name="Converter"
+        component={ConverterScreen}
+        options={{
+            tabBarIcon: ({ color, size }) => (
+                <Image source={require('../assets/images/change.png')} style={{ width: 20, height: 20 }} />
+            ),
+            title: "Converter",
         }}
         />
 

@@ -3,15 +3,13 @@ import { View, StyleSheet, Platform } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import { MaterialIcons } from "@expo/vector-icons";
 import exchangeRateInfo from '../exchangeInfo.json';
-import { setCurrency } from '../store/slices/currencySlice'; 
+import { setCurrency, setSecondCurrency } from '../store/slices/currencySlice'; 
 import { useDispatch, useSelector } from "react-redux";
 
 
 const ExchangeSelector = () => {
   const [selectedExchange1, setSelectedExchange1] = useState("USD");
   const [selectedExchange2, setSelectedExchange2] = useState("EUR");
-
-  // const currencyInfo = useSelector((state) => state.currency.selectedCurrency);
 
   const handleSwap = () => {
     setSelectedExchange1(selectedExchange2);
@@ -21,13 +19,14 @@ const ExchangeSelector = () => {
   const dispatch = useDispatch();
   
   const handleCurrencyChange = (currency) => {
-    console.log("currencyCHANGE: "+ currency);
     dispatch(setCurrency(currency)); 
   };
 
   useEffect(() => {
     dispatch(setCurrency(selectedExchange1));
-  }, [selectedExchange1, dispatch]);
+    dispatch(setSecondCurrency(selectedExchange2));
+
+  }, [selectedExchange1, dispatch,selectedExchange2]);
 
   return (
     <View style={styles.container}>

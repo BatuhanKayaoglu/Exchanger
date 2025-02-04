@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
         borderRadius: 10,
         marginBottom: 10,
-        backgroundColor: '#2B2B2B', // Arkaplan rengi ekleyerek gölgeyi belirgin hale getirdik
+        backgroundColor: '#2B2B2B', 
     },
 
     exchangeName: {
