@@ -34,15 +34,15 @@ function ScreenTabs() {
         <Tab.Navigator
         screenOptions={{
             tabBarStyle: {
-              backgroundColor: '#171515', // Koyu Gri TabBar Arkaplanı
+              backgroundColor: '#171515', 
               borderTopWidth: 0,
             },
-            tabBarActiveTintColor: '#0ECB81', // Seçili sekmeler için Yeşil
-            tabBarInactiveTintColor: '#B0B3B8', // Pasif sekmeler için Açık Gri
+            tabBarActiveTintColor: '#0ECB81', 
+            tabBarInactiveTintColor: '#B0B3B8', 
             headerStyle: {
-              backgroundColor: '#1E1E1E', // Header için Mavi Arkaplan
+              backgroundColor: '#1E1E1E', 
             },
-            headerTintColor: '#0ECB81', // Header Yazı Rengi Beyaz
+            headerTintColor: '#0ECB81', 
           }}
         >
         <Tab.Screen
@@ -99,22 +99,22 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#121212", // Dark ton arka plan
+        backgroundColor: "#121212", 
     },
     text: {
-        color: "#ffffff", // Beyaz metin rengi
+        color: "#ffffff", 
     },
     addButton: {
         marginRight: 15,
-        backgroundColor: "#6200EE", // Koyu mor arka plan
+        backgroundColor: "#6200EE", 
         padding: 12,
-        borderRadius: 30, // Yuvarlak buton
+        borderRadius: 30, 
         alignItems: "center",
         justifyContent: "center",
-        shadowColor: "#000000", // Buton gölgesi
+        shadowColor: "#000000",
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
-        elevation: 5, // Android'deki gölge
+        elevation: 5, 
     },
 });
