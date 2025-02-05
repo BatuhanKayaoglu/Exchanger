@@ -7,7 +7,7 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import ExchangeSelector from "../components/ExchangeSelecter";
-import { useGetUserQuery } from "../store/apis/exchangeApi";
+import { useGetExchangeQuery } from "../store/apis/exchangeApi";
 import { useSelector } from "react-redux";
 
 export default function ConverterScreen() {
@@ -22,7 +22,7 @@ export default function ConverterScreen() {
     error,
     isLoading,
     isFetching,
-  } = useGetUserQuery(selectedCurrency);
+  } = useGetExchangeQuery(selectedCurrency);
 
   const exchangeRate = exchangeInfo?.conversion_rates[secondCurrency] || 0;
 

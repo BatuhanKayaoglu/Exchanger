@@ -2,10 +2,9 @@ import React, { useEffect, useState } from "react";
 import { View, StyleSheet, Platform } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import { MaterialIcons } from "@expo/vector-icons";
-import exchangeRateInfo from '../exchangeInfo.json';
-import { setCurrency, setSecondCurrency } from '../store/slices/currencySlice'; 
+import exchangeRateInfo from "../exchangeInfo.json";
+import { setCurrency, setSecondCurrency } from "../store/slices/currencySlice";
 import { useDispatch, useSelector } from "react-redux";
-
 
 const ExchangeSelector = () => {
   const [selectedExchange1, setSelectedExchange1] = useState("USD");
@@ -17,16 +16,15 @@ const ExchangeSelector = () => {
   };
 
   const dispatch = useDispatch();
-  
+
   const handleCurrencyChange = (currency) => {
-    dispatch(setCurrency(currency)); 
+    dispatch(setCurrency(currency));
   };
 
   useEffect(() => {
     dispatch(setCurrency(selectedExchange1));
     dispatch(setSecondCurrency(selectedExchange2));
-
-  }, [selectedExchange1, dispatch,selectedExchange2]);
+  }, [selectedExchange1, dispatch, selectedExchange2]);
 
   return (
     <View style={styles.container}>
@@ -36,21 +34,21 @@ const ExchangeSelector = () => {
           selectedValue={selectedExchange1}
           onValueChange={handleCurrencyChange}
           style={styles.picker}
-          
         >
-        {Object.entries(exchangeRateInfo).map(([key, value]) => (
-          <Picker.Item key={key} label={value} value={key} />
-        ))}
+          {Object.entries(exchangeRateInfo).map(([key, value]) => (
+            <Picker.Item key={key} label={value} value={key} />
+          ))}
         </Picker>
       </View>
 
       {/* Ortadaki Takas İkonu */}
-      <MaterialIcons name="swap-horiz"
-       size={45}
+      <MaterialIcons
+        name="swap-horiz"
+        size={45}
         color="#FE2266"
-         style={{ marginHorizontal: 20 }}
-         onPress={handleSwap}
-         />
+        style={{ marginHorizontal: 20 }}
+        onPress={handleSwap}
+      />
 
       {/* Sağdaki Select */}
       <View style={styles.pickerContainer}>
@@ -60,8 +58,8 @@ const ExchangeSelector = () => {
           style={styles.picker}
         >
           {Object.entries(exchangeRateInfo).map(([key, value]) => (
-          <Picker.Item key={key} label={value} value={key} />
-        ))}
+            <Picker.Item key={key} label={value} value={key} />
+          ))}
         </Picker>
       </View>
     </View>
@@ -82,7 +80,6 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     overflow: "hidden", // Taşan gölge efektlerini temizler
 
-
     ...Platform.select({
       ios: {
         shadowColor: "#2B2B2B",
@@ -93,8 +90,6 @@ const styles = StyleSheet.create({
       android: {
         elevation: 5,
       },
-
-
     }),
   },
   picker: {
