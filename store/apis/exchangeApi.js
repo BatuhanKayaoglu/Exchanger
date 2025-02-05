@@ -16,40 +16,12 @@ export const exchangesApi = createApi({
     getExchange: builder.query({
       query: (currency) => `/latest/${currency}`,
     }),
-
-    createUser: builder.mutation({
-      invalidatesTags: () => [{ type: "User" }], // 'User' tag'ini invalid etmeyi belirtiyoruz yani benim bir silme ekleme güncelleme gibi durumlarda tekrar fetch etmesini istiyorum.
-
-      query: (user) => ({
-        url: "/users",
-        method: "POST",
-        body: user,
-      }),
-    }),
-
-    updateUser: builder.mutation({
-      query: (user) => ({
-        url: `/users/${user.id}`,
-        method: "PUT",
-        body: user,
-      }),
-    }),
-
-    deleteUser: builder.mutation({
-      query: (id) => ({
-        url: `/users/${id}`,
-        method: "DELETE",
-      }),
-    }),
   }),
 });
 
 export const {
   useGetExchangesQuery,
   useGetExchangeQuery,
-  useCreateUserMutation,
-  useUpdateUserMutation,
-  useDeleteUserMutation,
 } = exchangesApi;
 
 export default exchangesApi;
