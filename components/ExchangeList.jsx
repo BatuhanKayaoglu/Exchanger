@@ -9,7 +9,6 @@ export default function ExchangeList() {
 
     const selectedCurrency = useSelector((state) => state.currency.selectedCurrency);
     const { data: exchangeInfo, error, isLoading,isFetching } = useGetUserQuery(selectedCurrency);
-    console.log(exchangeInfo);  
     
     if (isFetching) return <ActivityIndicator style={styles.loader} size="large" color="#FE2266" />;
     if (error) return <Text>Error fetching data</Text>;
