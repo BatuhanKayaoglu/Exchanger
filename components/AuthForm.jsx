@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { Text, Input } from "react-native-elements";
 import { useSignInMutation } from "../store/apis/authApi";
-import { useSignUpMutation } from "../store/apis/authApi"; 
-import { setToken } from "../store/slices/authSlice";
+import { useSignUpMutation } from "../store/apis/authApi";
+import { setToken, setUser } from "../store/slices/authSlice";
 import { useDispatch } from "react-redux";
 import { useNavigation } from "expo-router";
 
@@ -26,9 +26,7 @@ const AuthForm = ({
   const [signUp, { isLoading: signUpLoading, error: signUpError }] =
     useSignUpMutation();
 
-  const errorMessage = isSignUp
-    ? signUpError?.data?.message
-    : signInError?.data?.message;
+  const errorMessage = isSignUp ? signUpError?.data : signInError?.data?.error;
 
   const handleSubmit = async () => {
     const userData = { email, password };
@@ -39,12 +37,15 @@ const AuthForm = ({
         console.log(isSignUp);
         const response = await signUp(userData).unwrap();
         dispatch(setToken(response.token));
-        navigation.navigate("Tab");
+        dispatch(setUser({ username: email, password: password}));
+        navigation.navigate("MainTabs");
       } else {
         // SignIn işlemi
         const response = await signIn(userData).unwrap();
         dispatch(setToken(response.token));
-        navigation.navigate("Tab");
+        dispatch(setUser({ username: email, password: password}));
+
+        navigation.navigate("MainTabs");
       }
     } catch (error) {
       console.error(error);
@@ -91,10 +92,6 @@ const AuthForm = ({
           }}
         />
 
-        {errorMessage ? (
-          <Text style={styles.errorMessage}>{errorMessage}</Text>
-        ) : null}
-
         <TouchableOpacity
           style={styles.button}
           onPress={handleSubmit}
@@ -102,6 +99,10 @@ const AuthForm = ({
         >
           <Text style={styles.buttonText}>{submitButtonText}</Text>
         </TouchableOpacity>
+
+        {errorMessage ? (
+          <Text style={styles.errorMessage}>{errorMessage}</Text>
+        ) : null}
       </View>
 
       <TouchableOpacity
@@ -158,7 +159,9 @@ const styles = StyleSheet.create({
   },
   errorMessage: {
     color: "red",
-    marginBottom: 15,
+    fontSize: 16,
+    marginBottom: 5,
+    marginTop: 10,
     textAlign: "center",
   },
   linkContainer: {

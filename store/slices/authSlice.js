@@ -19,8 +19,8 @@ const authSlice = createSlice({
       AsyncStorage.setItem("token", action.payload);
     },
     setUser: (state, action) => {
-      state.user.username = action.payload;
-      state.user.password = action.payload;
+      state.user.username = action.payload.username;
+      state.user.password = action.payload.password;
     },
     clearAuth: (state) => {
       state.token = "";

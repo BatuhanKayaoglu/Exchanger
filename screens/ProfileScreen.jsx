@@ -1,14 +1,29 @@
 import React from "react";
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigation } from "expo-router";
+import { clearAuth } from "../store/slices/authSlice";
 
 const ProfileScreen = () => {
+
+  const navigation = useNavigation(); 
+  const dispatch = useDispatch();
+
+  var userInfo = useSelector((state) =>state.auth.user);
+  console.log(userInfo);  
+
+  const handleSignOut = () => {
+    dispatch(clearAuth());
+    navigation.navigate("Signin");
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <Image source={''} style={styles.avatar} />
         <Text style={styles.username}>Batuhan Kayaoğlu</Text>
-        <Text style={styles.email}>batu@example.com</Text>
+        <Text style={styles.email}>{userInfo.username}</Text>
       </View>
       
       <View style={styles.section}>
@@ -16,7 +31,7 @@ const ProfileScreen = () => {
           <Ionicons name="settings-outline" size={20} color="#fff" />
           <Text style={styles.buttonText}>Ayarlar</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={handleSignOut}>
           <Ionicons name="log-out-outline" size={20} color="#fff" />
           <Text style={styles.buttonText}>Çıkış Yap</Text>
         </TouchableOpacity>

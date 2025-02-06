@@ -12,7 +12,6 @@ export default function HomeScreen() {
       <ExchangeSelecter/>
       <ExchangeList/>
       </View>
-   
     );
   };
 

@@ -7,7 +7,7 @@ import {
 } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Provider } from "react-redux";
+import { Provider, useSelector } from "react-redux";
 import HomeScreen from "../screens/HomeScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import ConverterScreen from "../screens/ConverterScreen";
@@ -24,33 +24,49 @@ const Tab = createBottomTabNavigator();
 
 // RootStack'i şimdilik kullanmıyoruz çünkü TAB yapısı mevcut ve onun üzerinden ilerleyeceğiz.
 function RootStack() {
+  const token = useSelector((state) => state.auth.token);
+
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="Signin" component={SigninScreen} />
-      <Stack.Screen name="Signup" component={SignupScreen} />
-      <Stack.Screen name="Home" component={HomeScreen} />
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: { backgroundColor: "#1E1E1E" },
+        headerTintColor: "#0ECB81",
+      }}
+    >
+            <Stack.Screen
+        name="MainTabs"
+        component={ScreenTabs}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Signin"
+        component={SigninScreen}
+        options={{ title: "Sign In" }}
+      />
+
+
+      <Stack.Screen
+        name="Signup"
+        component={SignupScreen}
+        options={{ title: "Sign Up" }}
+      />
     </Stack.Navigator>
   );
 }
 
+// ScreenTabs fonksiyonundan Signin ve Signup Tab.Screen'leri silin
 function ScreenTabs() {
-  const navigation = useNavigation();
-
   return (
     <Tab.Navigator
       screenOptions={{
-        tabBarStyle: {
-          backgroundColor: "#171515",
-          borderTopWidth: 0,
-        },
+        tabBarStyle: { backgroundColor: "#171515", borderTopWidth: 0 },
         tabBarActiveTintColor: "#0ECB81",
         tabBarInactiveTintColor: "#B0B3B8",
-        headerStyle: {
-          backgroundColor: "#1E1E1E",
-        },
+        headerStyle: { backgroundColor: "#1E1E1E" },
         headerTintColor: "#0ECB81",
       }}
     >
+      {/* Sadece kalmasını istediğiniz tab'ları bırakın */}
       <Tab.Screen
         name="Home"
         component={HomeScreen}
@@ -58,10 +74,8 @@ function ScreenTabs() {
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="home-outline" size={size} color={color} />
           ),
-          title: "Home",
         }}
       />
-
       <Tab.Screen
         name="Profile"
         component={ProfileScreen}
@@ -69,32 +83,8 @@ function ScreenTabs() {
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="person-circle-outline" size={size} color={color} />
           ),
-          title: "Profile",
         }}
       />
-
-      <Tab.Screen
-        name="History"
-        component={HistoryScreen}
-        options={{
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="document-text-outline" size={size} color={color} />
-          ),
-          title: "History",
-        }}
-      />
-
-      <Tab.Screen
-        name="Signup"
-        component={SignupScreen}
-        options={{
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="document-text-outline" size={size} color={color} />
-          ),
-          title: "Register",
-        }}
-      />
-
       <Tab.Screen
         name="Converter"
         component={ConverterScreen}
@@ -105,7 +95,16 @@ function ScreenTabs() {
               style={{ width: 20, height: 20 }}
             />
           ),
-          title: "Converter",
+        }}
+      />
+      <Tab.Screen
+        name="History"
+        component={HistoryScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="document-text-outline" size={size} color={color} />
+          ),
+          title: "History",
         }}
       />
     </Tab.Navigator>
@@ -117,7 +116,7 @@ export default function App() {
     <Provider store={store}>
       <NavigationIndependentTree>
         <NavigationContainer>
-          <ScreenTabs />
+          <RootStack />
         </NavigationContainer>
       </NavigationIndependentTree>
     </Provider>
