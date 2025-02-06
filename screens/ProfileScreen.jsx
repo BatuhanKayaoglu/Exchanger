@@ -21,7 +21,7 @@ const ProfileScreen = () => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Image source={''} style={styles.avatar} />
+        <Image source={require("../assets/images/user-picture.png")} style={styles.avatar} />
         <Text style={styles.username}>Batuhan Kayaoğlu</Text>
         <Text style={styles.email}>{userInfo.username}</Text>
       </View>

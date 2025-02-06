@@ -55,6 +55,7 @@ function RootStack() {
         name="ExchangeDetail"
         component={ExchangeDetailScren}
         options={({ route }) => ({
+          headerTintColor: "#FE2266",
           headerTitle: route.params?.title,
         })}
       />
@@ -68,10 +69,10 @@ function ScreenTabs() {
     <Tab.Navigator
       screenOptions={{
         tabBarStyle: { backgroundColor: "#171515", borderTopWidth: 0 },
-        tabBarActiveTintColor: "#0ECB81",
+        tabBarActiveTintColor: "#FE2266",
         tabBarInactiveTintColor: "#B0B3B8",
         headerStyle: { backgroundColor: "#1E1E1E" },
-        headerTintColor: "#0ECB81",
+        headerTintColor: "#FE2266",
       }}
     >
       {/* Sadece kalmasını istediğiniz tab'ları bırakın */}
