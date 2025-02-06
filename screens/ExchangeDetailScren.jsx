@@ -121,29 +121,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#fff",
   },
-  percentage: {
-    fontSize: 16,
-    fontWeight: "bold",
-    textAlign: "center",
-    marginTop: 10,
-  },
-  up: {
-    color: "#00FF00", // Yeşil (Fiyat yükselince)
-  },
-  down: {
-    color: "#FF0000", // Kırmızı (Fiyat düşünce)
-  },
-  updateTime: {
-    fontSize: 12,
-    color: "#bbb",
-    textAlign: "center",
-    marginTop: 5,
-  },
-  flag: {
-    width: 30,
-    height: 20,
-    marginRight: 10,
-  },
   currency: {
     fontSize: 16,
     fontWeight: "bold",
