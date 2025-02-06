@@ -1,17 +1,24 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
 import { useSelector } from "react-redux";
+import { useNavigation } from "expo-router";
 
 export default function ExchangeCard({ currency, rate }) {
-    
   const selectedCurrency = useSelector(
     (state) => state.currency.selectedCurrency
   );
 
+  var navigation = useNavigation();
+
   const randomChange = (Math.random() * 10 - 5).toFixed(2);
 
   return (
-    <View style={styles.container}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() =>
+        navigation.navigate("ExchangeDetail", { title: currency, rate: rate })
+      }
+    >
       <View style={styles.exchangeInfo}>
         <Text style={styles.exchangeName}>{currency}</Text>
         <Text style={styles.exchangeData}>{rate}</Text>
@@ -22,7 +29,7 @@ export default function ExchangeCard({ currency, rate }) {
         </Text>
         <Text style={styles.exchangeMiniData}>{randomChange}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }
 

@@ -18,6 +18,7 @@ import HistoryScreen from "../screens/HistoryScreen";
 import { store } from "../store";
 import SigninScreen from "../screens/SigninScreen";
 import SignupScreen from "../screens/SignupScreen";
+import ExchangeDetailScren from "../screens/ExchangeDetailScren";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -33,7 +34,7 @@ function RootStack() {
         headerTintColor: "#0ECB81",
       }}
     >
-            <Stack.Screen
+      <Stack.Screen
         name="MainTabs"
         component={ScreenTabs}
         options={{ headerShown: false }}
@@ -44,11 +45,18 @@ function RootStack() {
         options={{ title: "Sign In" }}
       />
 
-
       <Stack.Screen
         name="Signup"
         component={SignupScreen}
         options={{ title: "Sign Up" }}
+      />
+
+      <Stack.Screen
+        name="ExchangeDetail"
+        component={ExchangeDetailScren}
+        options={({ route }) => ({
+          headerTitle: route.params?.title,
+        })}
       />
     </Stack.Navigator>
   );

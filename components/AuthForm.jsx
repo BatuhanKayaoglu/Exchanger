@@ -39,6 +39,7 @@ const AuthForm = ({
         dispatch(setToken(response.token));
         dispatch(setUser({ username: email, password: password}));
         navigation.navigate("MainTabs");
+        console.log(response);
       } else {
         // SignIn işlemi
         const response = await signIn(userData).unwrap();
