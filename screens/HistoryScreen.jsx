@@ -1,9 +1,53 @@
-import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import { Button, StyleSheet, Text, View } from "react-native";
+import React, { useEffect } from "react";
 import { Dimensions } from "react-native";
 import { LineChart } from "react-native-chart-kit";
+import * as Notifications from 'expo-notifications';
+import { useNavigation } from "expo-router";
+
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: false,
+    shouldSetBadge: true,
+  }),
+});
 
 export default function HistoryScreen() {
+
+  const navigation = useNavigation();
+
+useEffect(() => {
+    const receivedListener = Notifications.addNotificationReceivedListener(notification => {
+      console.log("Bildirim Alındı: ", notification);
+    });
+
+    const responseListener = Notifications.addNotificationResponseReceivedListener(response => {
+      console.log("Bildirim Cevaplandı: ", response);
+      navigation.navigate("MainTabs");
+    });
+
+    return () => {
+      Notifications.removeNotificationSubscription(receivedListener);
+      Notifications.removeNotificationSubscription(responseListener);
+    };
+  }, []);
+
+  async function scheduleNotificationHandler() {
+    console.log("Notification Scheduled");
+    await Notifications.scheduleNotificationAsync({
+      content: {
+        title: "USD Exchange Rate",
+        body: "USD/TRY: 8.50",
+        data: { data: "goes here" },
+      },
+      trigger: {
+        seconds: 5,
+      },
+    });
+  }
+
+
   const exchangeRates = [
     { date: "02-01", rate: 28.5 },
     { date: "02-02", rate: 28.7 },
@@ -30,6 +74,8 @@ export default function HistoryScreen() {
           USD Exchange Graphics
         </Text>
       </View>
+
+      <Button title="Schedule Notification" onPress={scheduleNotificationHandler}/>
 
       <LineChart
         data={{

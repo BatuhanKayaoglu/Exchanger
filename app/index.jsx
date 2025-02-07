@@ -34,16 +34,15 @@ function RootStack() {
       }}
     >
       <Stack.Screen
-        name="Signin"
-        component={SigninScreen}
-        options={{ title: "Sign In" }}
-      />
-      <Stack.Screen
         name="MainTabs"
         component={ScreenTabs}
         options={{ headerShown: false }}
       />
-
+      <Stack.Screen
+        name="Signin"
+        component={SigninScreen}
+        options={{ title: "Sign In" }}
+      />
       <Stack.Screen
         name="Signup"
         component={SignupScreen}
