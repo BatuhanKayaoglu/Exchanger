@@ -13,7 +13,6 @@ import ProfileScreen from "../screens/ProfileScreen";
 import ConverterScreen from "../screens/ConverterScreen";
 import { Image, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { useNavigation } from "expo-router";
 import HistoryScreen from "../screens/HistoryScreen";
 import { store } from "../store";
 import SigninScreen from "../screens/SigninScreen";
@@ -35,14 +34,14 @@ function RootStack() {
       }}
     >
       <Stack.Screen
-        name="MainTabs"
-        component={ScreenTabs}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
         name="Signin"
         component={SigninScreen}
         options={{ title: "Sign In" }}
+      />
+      <Stack.Screen
+        name="MainTabs"
+        component={ScreenTabs}
+        options={{ headerShown: false }}
       />
 
       <Stack.Screen

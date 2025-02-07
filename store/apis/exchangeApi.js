@@ -1,8 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { API_KEY, EXCHANGE_BASE_URL } from "@env";
 
 export const exchangesApi = createApi({
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://v6.exchangerate-api.com/v6/" + "a9b90cf5c27013b3c1686482",
+    baseUrl: EXCHANGE_BASE_URL + API_KEY,
   }),
 
   tagTypes: ["Exchange"],
@@ -19,9 +20,6 @@ export const exchangesApi = createApi({
   }),
 });
 
-export const {
-  useGetExchangesQuery,
-  useGetExchangeQuery,
-} = exchangesApi;
+export const { useGetExchangesQuery, useGetExchangeQuery } = exchangesApi;
 
 export default exchangesApi;
